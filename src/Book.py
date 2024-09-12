@@ -18,3 +18,4 @@ class Book:
 
     def __str__(self) -> str:
         return f"{self.title} por {self.author} (ISBN: {self.isbn})"
+

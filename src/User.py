@@ -1,26 +1,21 @@
 class User:
-    def __init__(self, dni, name, number_of_checkouts=0, number_of_checkins=0):
-        self.__dni = dni
-        self.__name = name
-        self.__number_of_checkouts = number_of_checkouts
-        self.__number_of_checkins = number_of_checkins
+    def __init__(self, name: str, user_id: int) -> None:
+        self.name = name
+        self.user_id = user_id
 
-    # Getters
-    def get_dni(self):
-        return self.__dni
+    def get_name(self) -> str:
+        return self.name
 
-    def get_name(self):
-        return self.__name
+    def get_user_id(self) -> int:
+        return self.user_id
 
-    def get_number_of_checkouts(self):
-        return self.__number_of_checkouts
+    def set_name(self, new_name: str) -> None:
+        self.name = new_name
 
-    def get_number_of_checkins(self):
-        return self.__number_of_checkins
+    def __str__(self) -> str:
+        return f"User: {self.name}, ID: {self.user_id}"
 
-    # Setters
-    def increment_checkouts(self):
-        self.__number_of_checkouts += 1
-
-    def increment_checkins(self):
-        self.__number_of_checkins += 1
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, User):
+            return self.user_id == other.user_id
+        return False

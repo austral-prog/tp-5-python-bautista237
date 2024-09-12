@@ -1,28 +1,34 @@
-class Book:
-    def __init__(self, title: str, author: str, book_id: int) -> None:
-        self.title = title
-        self.author = author
-        self.book_id = book_id
+from src.Book import Book
+from src.User import User
 
-    def get_title(self) -> str:
-        return self.title
+class Library:
+    def __init__(self) -> None:
+        self.books: list[Book] = []
+        self.users: list[User] = []
 
-    def get_author(self) -> str:
-        return self.author
+    def add_book(self, book: Book) -> None:
+        self.books.append(book)
 
-    def get_book_id(self) -> int:
-        return self.book_id
+    def remove_book(self, book: Book) -> None:
+        self.books.remove(book)
 
-    def set_title(self, new_title: str) -> None:
-        self.title = new_title
+    def add_user(self, user: User) -> None:
+        self.users.append(user)
 
-    def set_author(self, new_author: str) -> None:
-        self.author = new_author
+    def remove_user(self, user: User) -> None:
+        self.users.remove(user)
 
-    def __str__(self) -> str:
-        return f"Book: {self.title} by {self.author}, ID: {self.book_id}"
+    def find_book(self, title: str) -> Book | None:
+        for book in self.books:
+            if book.title == title:
+                return book
+        return None
 
-    def __eq__(self, other: object) -> bool:
-        if isinstance(other, Book):
-            return self.book_id == other.book_id
-        return False
+    def is_user_registered(self, user: User) -> bool:
+        return user in self.users
+
+    def list_books(self) -> list[Book]:
+        return self.books
+
+    def list_users(self) -> list[User]:
+        return self.users

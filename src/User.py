@@ -1,21 +1,23 @@
+from typing import List
+
 class User:
-    def __init__(self, name: str, user_id: int) -> None:
+    def __init__(self, name: str, email: str) -> None:
         self.name = name
-        self.user_id = user_id
+        self.email = email
+        self.borrowed_books: List[str] = []
 
-    def get_name(self) -> str:
-        return self.name
+    def borrow_book(self, book: str) -> None:
+        """Add a book to the user's borrowed books list."""
+        self.borrowed_books.append(book)
 
-    def get_user_id(self) -> int:
-        return self.user_id
+    def return_book(self, book: str) -> None:
+        """Remove a book from the user's borrowed books list."""
+        if book in self.borrowed_books:
+            self.borrowed_books.remove(book)
 
-    def set_name(self, new_name: str) -> None:
-        self.name = new_name
+    def has_borrowed(self, book: str) -> bool:
+        """Check if the user has borrowed a specific book."""
+        return book in self.borrowed_books
 
     def __str__(self) -> str:
-        return f"User: {self.name}, ID: {self.user_id}"
-
-    def __eq__(self, other: object) -> bool:
-        if isinstance(other, User):
-            return self.user_id == other.user_id
-        return False
+        return f"User(name={self.name}, email={self.email})"

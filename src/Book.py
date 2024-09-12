@@ -1,37 +1,28 @@
 class Book:
-    def __init__(self, isbn, title, author, available=True, checkout_num=0):
-        self.__isbn = isbn
-        self.__title = title
-        self.__author = author
-        self.__available = available
-        self.__checkout_num = checkout_num
+    def __init__(self, title: str, author: str, book_id: int) -> None:
+        self.title = title
+        self.author = author
+        self.book_id = book_id
 
-    # Getters
-    def get_isbn(self):
-        return self.__isbn
+    def get_title(self) -> str:
+        return self.title
 
-    def get_title(self):
-        return self.__title
+    def get_author(self) -> str:
+        return self.author
 
-    def get_author(self):
-        return self.__author
+    def get_book_id(self) -> int:
+        return self.book_id
 
-    def is_available(self):
-        return self.__available
+    def set_title(self, new_title: str) -> None:
+        self.title = new_title
 
-    def get_checkout_num(self):
-        return self.__checkout_num
+    def set_author(self, new_author: str) -> None:
+        self.author = new_author
 
-    # Setters
-    def set_available(self, available):
-        self.__available = available
-
-    def increment_checkout_num(self):
-        self.__checkout_num += 1
-
-    # Utils
     def __str__(self) -> str:
-        return f"ISBN: {self.__isbn}, Title: {self.__title}, Author: {self.__author}"
+        return f"Book: {self.title} by {self.author}, ID: {self.book_id}"
 
-    def __eq__(self, other):
-        return isinstance(other, Book) and self.__isbn == other.get_isbn()
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Book):
+            return self.book_id == other.book_id
+        return False

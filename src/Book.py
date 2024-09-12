@@ -1,34 +1,20 @@
-from src.Book import Book
-from src.User import User
+class Book:
+    def __init__(self, title: str, author: str, isbn: str) -> None:
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+        self.is_available: bool = True
 
-class Library:
-    def __init__(self) -> None:
-        self.books: list[Book] = []
-        self.users: list[User] = []
+    def borrow(self) -> None:
+        """Marca el libro como prestado."""
+        if self.is_available:
+            self.is_available = False
+        else:
+            raise Exception(f"El libro '{self.title}' ya está prestado.")
 
-    def add_book(self, book: Book) -> None:
-        self.books.append(book)
+    def return_book(self) -> None:
+        """Marca el libro como disponible."""
+        self.is_available = True
 
-    def remove_book(self, book: Book) -> None:
-        self.books.remove(book)
-
-    def add_user(self, user: User) -> None:
-        self.users.append(user)
-
-    def remove_user(self, user: User) -> None:
-        self.users.remove(user)
-
-    def find_book(self, title: str) -> Book | None:
-        for book in self.books:
-            if book.title == title:
-                return book
-        return None
-
-    def is_user_registered(self, user: User) -> bool:
-        return user in self.users
-
-    def list_books(self) -> list[Book]:
-        return self.books
-
-    def list_users(self) -> list[User]:
-        return self.users
+    def __str__(self) -> str:
+        return f"{self.title} por {self.author} (ISBN: {self.isbn})"
